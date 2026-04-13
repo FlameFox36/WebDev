@@ -1,38 +1,46 @@
-import { useState } from 'react';
-import { newsData, categories } from './data/newsData';
-import CategoryFilter from './components/CategoryFilter';
-import NewsBlock from './components/NewsBlock';
+import { useState, useEffect } from 'react';
+import { fetchBooks } from './data/booksData';
+import BookCatalog from './components/BookCatalog';
 import './App.css';
 
 function App() {
-
-  const [activeCategory, setActiveCategory] = useState('technology');
-  const currentCategoryObj = categories.find(cat => cat.id === activeCategory);
-  const categoryName = currentCategoryObj?.name || 'Новости';
-  const currentNews = newsData[activeCategory] || [];
+  const [books, setBooks] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   
-  const handleCategoryChange = (categoryId) => {
-    setActiveCategory(categoryId);
-  };
+  useEffect(() => {
+    const loadBooks = async () => {
+      try {
+        setLoading(true);
+        const data = await fetchBooks();
+        setBooks(data);
+        setError(null);
+      } catch (err) {
+        setError('Ошибка загрузки книг. Попробуйте позже.');
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    loadBooks();
+  }, []);
   
   return (
     <div className="app">
       <header className="app-header">
-        <h1>Новостной портал</h1>
-        <p>Присутствует фильтр по категориям.</p>
+        <h1>Онлайн-библиотека</h1>
+        <p>Каталог книг с фильтрацией по доступности</p>
       </header>
       
       <main>
-        <CategoryFilter
-          categories={categories}
-          activeCategory={activeCategory}
-          onCategoryChange={handleCategoryChange}
-        />
-        
-        <NewsBlock
-          news={currentNews}
-          categoryName={categoryName}
-        />
+        {error ? (
+          <div className="error-message">
+            <p>{error}</p>
+          </div>
+        ) : (
+          <BookCatalog books={books} loading={loading} />
+        )}
       </main>
       
       <footer className="app-footer">
