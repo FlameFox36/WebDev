@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Орлов Павел | Геймдев Портфолио</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            color: #1e2a3a;
+            padding: 32px 20px;
+            line-height: 1.5;
+        }
+
+        .game-dev-card {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+            padding: 32px 36px 40px 36px;
+            transition: all 0.2s ease;
+        }
+
+        header {
+            margin-bottom: 32px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #0f2b3d;
+            margin-bottom: 8px;
+            letter-spacing: -0.3px;
+        }
+
+        .headline {
+            font-size: 1rem;
+            color: #4a627a;
+            font-weight: 400;
+            margin-top: 6px;
+        }
+
+        section {
+            margin-bottom: 36px;
+        }
+
+        section h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 18px;
+            color: #1f3b4c;
+            letter-spacing: -0.2px;
+            border-left: 4px solid #3b82b6;
+            padding-left: 14px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 12px 0 8px 0;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+        }
+
+        th, td {
+            border: 1px solid #e2edf2;
+            padding: 12px 16px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background-color: #f1f5f9;
+            font-weight: 600;
+            color: #1e4a6e;
+            width: 30%;
+        }
+
+        article {
+            background-color: #fefefe;
+            border: 1px solid #e9f0f5;
+            border-radius: 14px;
+            padding: 20px 24px;
+            margin: 20px 0 18px 0;
+        }
+
+        article h3 {
+            font-size: 1.35rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #1f4a6e;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        ul li {
+            margin-bottom: 12px;
+            padding-left: 20px;
+            position: relative;
+            color: #2c3f4f;
+        }
+
+        ul li::before {
+            content: "- ";
+            position: absolute;
+            left: 4px;
+            color: #3b82b6;
+            font-weight: 500;
+        }
+
+        .contact-form-block {
+            background-color: #fafcff;
+            border-radius: 18px;
+            padding: 20px 24px 28px 24px;
+            margin-top: 16px;
+            border: 1px solid #e0edf5;
+        }
+
+        .contact-form-block h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+            color: #1f4a6e;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .field-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        label {
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: #2c5a7a;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #cbdbe0;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            background-color: white;
+            transition: 0.2s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #3b82b6;
+            box-shadow: 0 0 0 3px rgba(59,130,182,0.15);
+        }
+
+        input[type="submit"] {
+            background-color: #2c6280;
+            color: white;
+            font-weight: 600;
+            border: none;
+            padding: 12px 20px;
+            margin-top: 6px;
+            cursor: pointer;
+            border-radius: 40px;
+            font-size: 0.95rem;
+            transition: background 0.2s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #1f4a6e;
+        }
+
+        footer {
+            margin-top: 40px;
+            padding-top: 24px;
+            text-align: center;
+            border-top: 1px solid #e2edf2;
+        }
+
+        footer p {
+            font-size: 0.8rem;
+            color: #5b7c9c;
+            line-height: 1.4;
+        }
+
+        @media (max-width: 620px) {
+            .game-dev-card {
+                padding: 20px;
+            }
+            th, td {
+                padding: 8px 12px;
+            }
+            article {
+                padding: 16px;
+            }
+        }
+
+        .skill-badge {
+            font-weight: 500;
+        }
+        .exp-role {
+            font-weight: 600;
+            color: #1e3a4d;
+        }
+    </style>
+</head>
+<body>
+
+<div class="game-dev-card">
+    <header>
+        <h1>Орлов Павел</h1>
+        <div class="headline">Game Designer | 3D Artist | Narrative Designer</div>
+        <div class="headline" style="margin-top: 6px; font-size: 0.85rem;">Создаю игры, окружение и миры | 3+ лет в индустрии</div>
+    </header>
+
+    <main>
+        <!-- ОБо мне -->
+        <section>
+            <h2>О себе и контакты</h2>
+            <ul>
+                <li>Москва / удалённая работа, готов к переезду</li>
+                <li>Специализация: разработка игр, левел-дизайн, системный-дизайн</li>
+                <li>Портфолио проектов: 10 выпущенных игр (мобильные + ПК)</li>
+                <li>Опыт работы в командах от 2 до 30 человек</li>
+                <li>Контакты: example@gamedev.ru | telegram: @example_gamedev</li>
+                <li>GitHub: https://github.com/FlameFox36 (прототипы)</li>
+            </ul>
+        </section>
+
+        <!-- Навыки -->
+        <section>
+            <h2>Навыки и инструменты</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Категория</th>
+                        <th>Инструменты / технологии</th>
+                        <th>Опыт</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Документация и дизайн</td>
+                        <td>Miro, Google Docs, Obsidian, Holst</td>
+                        <td>Эксперт (6 лет)</td>
+                    </tr>
+                    <tr>
+                        <td>Игровые движки</td>
+                        <td>Unity (C#), Godot(GD SDScript)</td>
+                        <td>Продвинутый (5 лет)</td>
+                    </tr>
+                    <tr>
+                        <td>Прототипирование</td>
+                        <td>Figma, Blender, Draw.io</td>
+                        <td>Высокий (4 года)</td>
+                    </tr>
+                    <tr>
+                        <td>Моделирование и тестурирование</td>
+                        <td>Blender, Adobe Substance 3D Painter, ZBrush, ScetchUp</td>
+                        <td>Начальный (2 года)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Опыт работы -->
+        <article>
+            <h3>Опыт работы в игровой индустрии</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Период</th>
+                        <th>Студия / Проект</th>
+                        <th>Ключевые обязанности и результаты</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2022 - настоящее время</td>
+                        <td>"Цирк Шапито" (ведущий геймдизайнер)</td>
+                        <td>Дизайн систем крафта и прогрессии для RPG "Game of the Year". Балансировка PvE и PvP.</td>
+                    </tr>
+                    <tr>
+                        <td>2020 - 2022</td>
+                        <td>Студия "Сибирь" (геймдизайнер, левел-дизайнер)</td>
+                        <td>Разработка левелов для мобильного roguelite. Настройка сложности и экономики ресурсов.</td>
+                    </tr>
+                    <tr>
+                        <td>2018 - 2020</td>
+                        <td>Пиксель-Миксель (Художник, Геймдизайнер)</td>
+                        <td>Создание геймдизайн-документов, создание ассетов, UI-дизайн.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </article>
+
+        <div class="contact-form-block">
+            <h3>Связаться со мной</h3>
+            <form action="#" method="post">
+                <div class="field-group">
+                    <label for="designer_name">Имя</label>
+                    <input type="text" id="designer_name" name="name" placeholder="Иванов Иван Иванович" required>
+                </div>
+                <div class="field-group">
+                    <label for="designer_email">Электронная почта</label>
+                    <input type="email" id="designer_email" name="email" placeholder="example@gmail.com" required>
+                </div>
+                <div class="field-group">
+                    <label for="project_idea">Кратко о проекте или предложении</label>
+                    <input type="text" id="project_idea" name="message" placeholder="Вакансия, сотрудничество, консультация">
+                </div>
+                <input type="submit" value="Отправить">
+            </form>
+        </div>
+    </main>
+
+    <!-- Футер -->
+    <footer>
+        <p>Орлов Павел — Game Designer и 3D Художник. Портфолио и резюме по запросу.</p>
+        <p>2026 - Все права защищены Бэтменом.</p>
+    </footer>
+</div>
+</body>
+</html>
