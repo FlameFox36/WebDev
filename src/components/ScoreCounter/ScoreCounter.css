@@ -1,0 +1,28 @@
+.score-counter {
+  background-color: #272E33;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.score-display {
+  font-size: 32px;
+  color: #A7C080;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.score-controls button {
+  background-color: #374145;
+  color: #D3C6AA;
+  border: 1px solid #414B50;
+  padding: 10px 20px;
+  margin: 0 5px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 4px;
+}
+
+.score-controls button:hover {
+  background-color: #414B50;
+}

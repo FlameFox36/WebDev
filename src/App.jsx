@@ -1,58 +1,94 @@
-import React, { useState } from 'react';
-import GradeTable from './components/GradeTable';
-import { studentsData, subjects } from './data/studentsData';
+import { useState, useEffect } from 'react';
+import TimerPanel from './components/TimerPanel/TimerPanel';
+import ScoreCounter from './components/ScoreCounter/ScoreCounter';
+import LivesCounter from './components/LivesCounter/LivesCounter';
+import HighScore from './components/HighScore/HighScore';
+import useLocalStorage from './hooks/useLocalStorage';
+import useSound from './hooks/useSound';
+import './App.css';
 
 function App() {
-  const [students, setStudents] = useState(studentsData);
+  const [time, setTime] = useLocalStorage('timer-time', 300);
+  const [score, setScore] = useLocalStorage('timer-score', 0);
+  const [lives, setLives] = useLocalStorage('timer-lives', 3);
+  const [highScore, setHighScore] = useLocalStorage('timer-highscore', 0);
+  const [isActive, setIsActive] = useState(false);
+  const [bgColor, setBgColor] = useState('#1E2326');
+  const { playBeep, playGameOver } = useSound();
 
-  const handleUpdateStudent = (studentId, subjectKey, newGrade) => {
-    setStudents(prevStudents =>
-      prevStudents.map(student =>
-        student.id === studentId
-          ? { ...student, [subjectKey]: newGrade }
-          : student
-      )
-    );
+  useEffect(() => {
+    if (time === 0) {
+      setIsActive(false);
+      playGameOver();
+    }
+  }, [time, playGameOver]);
+
+  useEffect(() => {
+    if (lives === 0) {
+      setIsActive(false);
+      playGameOver();
+    }
+  }, [lives, playGameOver]);
+
+  useEffect(() => {
+    if (time <= 10 && time > 0 && isActive) {
+      playBeep();
+    }
+  }, [time, isActive, playBeep]);
+
+  useEffect(() => {
+    if (score % 100 === 0 && score !== 0) {
+      playBeep();
+    }
+  }, [score, playBeep]);
+
+  useEffect(() => {
+    if (lives === 1) {
+      setBgColor('#493B40');
+    } else if (lives === 0) {
+      setBgColor('#4C3743');
+    } else if (time <= 10) {
+      setBgColor('#45443C');
+    } else {
+      setBgColor('#1E2326');
+    }
+  }, [lives, time]);
+
+  useEffect(() => {
+    document.body.style.backgroundColor = bgColor;
+    return () => {
+      document.body.style.backgroundColor = '';
+    };
+  }, [bgColor]);
+
+  const handleResetGame = () => {
+    setTime(300);
+    setScore(0);
+    setLives(3);
+    setIsActive(false);
   };
 
-  const totalStudents = students.length;
-  const averageClass = Math.round(
-    students.reduce((sum, student) => {
-      const total = subjects.reduce((s, subject) => s + student[subject.key], 0);
-      const avg = total / subjects.length;
-      return sum + avg;
-      }, 0) / totalStudents
-    );
-
   return (
-    <div className="container">
-      <h1>Таблица успеваемости</h1>
-      <div style={{ 
-        marginBottom: '20px', 
-        padding: '16px',
-        backgroundColor: '#2E383C',
-        borderRadius: '8px',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center'
-      }}>
-        <div>
-          <span style={{ color: '#D3C6AA' }}>Всего студентов: </span>
-          <span style={{ color: '#A7C080', fontWeight: 'bold', fontSize: '20px' }}>
-            {totalStudents}
-          </span>
+    <div className="app">
+      <h1 className="game-title">Игровой Таймер</h1>
+      <div className="game-container">
+        <div className="stats-panel">
+          <ScoreCounter score={score} setScore={setScore} />
+          <LivesCounter lives={lives} setLives={setLives} />
+          <HighScore score={score} highScore={highScore} setHighScore={setHighScore} />
         </div>
-        <div>
-          <span style={{ color: '#D3C6AA' }}>Средний балл группы: </span>
-          <span style={{ color: '#A7C080', fontWeight: 'bold', fontSize: '20px' }}>
-            {averageClass}%
-          </span>
+        <div className="timer-wrapper">
+          <TimerPanel 
+            time={time} 
+            setTime={setTime} 
+            isActive={isActive} 
+            setIsActive={setIsActive} 
+          />
+          <button className="reset-game-btn" onClick={handleResetGame}>
+            Сбросить Игру
+          </button>
         </div>
       </div>
-      <GradeTable 
-        students={students} 
-        onUpdateStudent={handleUpdateStudent}
-      />
     </div>
   );
 }

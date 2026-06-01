@@ -1,0 +1,33 @@
+.timer-panel {
+  background-color: #272E33;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.timer-display {
+  font-size: 48px;
+  font-family: monospace;
+  margin-bottom: 20px;
+  transition: color 0.3s ease;
+}
+
+.timer-controls button {
+  background-color: #374145;
+  color: #D3C6AA;
+  border: 1px solid #414B50;
+  padding: 10px 20px;
+  margin: 0 5px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 4px;
+}
+
+.timer-controls button:hover:not(:disabled) {
+  background-color: #414B50;
+}
+
+.timer-controls button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
